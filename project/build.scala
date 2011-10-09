@@ -59,6 +59,7 @@ object Builds extends Build {
       "org.scala-tools.sbt" % "launcher-interface" % "0.7.4" % "provided" from (
         "http://databinder.net/repo/org.scala-tools.sbt/launcher-interface/0.7.4/jars/launcher-interface.jar"),
       "com.codahale" %% "logula" % "2.1.3"),
+    libraryDependencies <++= scalaVersion(testDeps(_)),
     unmanagedSourceDirectories in Compile <+= baseDirectory( _ / "src_managed" ),
     buildInfoPackage := "scalaxb",
     sourceGenerators in Compile <+= buildInfo) ++ codeGenSettings
