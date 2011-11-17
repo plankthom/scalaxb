@@ -260,6 +260,7 @@ trait Module {
 
     def processImportables[A](xs: List[(Importable, A)])(implicit ev: CanBeRawSchema[A, RawSchema]) = xs flatMap {
       case (importable, file) =>
+        processSchema(schemas(importable), context, config)
         generate(schemas(importable), toFileNamePart(file), context, config) map { case (pkg, snippet, part) =>
           snippets += snippet
           val output = evTo.newInstance(pkg, part + ".scala")
